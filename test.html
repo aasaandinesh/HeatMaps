@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
+    <script src="pincode.js" type="text/javascript"></script>
+    <script src="allPincodesCircle.js" type="text/javascript"></script>
+    <!-- <script src="test.js" type="text/javascript"></script> -->
+ 
+    <script>
+
+
+
+
+    var p12; 
+    var data3;
+    var counter3;
+   var allPincodes1;
+
+    
+    function init(){
+    	p12=400000;
+    	data3=[];
+    	counter3=0;
+    	allPincodes1=getAllPincodes();
+    	
+    	
+    }
+   // setInterval(hiBhabhi(),300);	
+$(document).ready(
+		
+		function(){
+			init();
+					
+		}
+
+
+
+
+
+
+
+
+
+);
+
+function hiBhabhi() {
+	
+
+
+	
+	
+	 geocoder = new google.maps.Geocoder();
+ var address = allPincodes1[counter3]+", India";
+ 
+ geocoder.geocode( { 'address': address}, function(results, status) {
+   if (status == google.maps.GeocoderStatus.OK) {
+        // return results[0].geometry.location
+        data3[counter3]={};
+data3[counter3]["pincode"]=results[0].address_components[0].long_name;
+data3[counter3].lat= results[0].geometry.location.lat();
+data3[counter3].lng=results[0].geometry.location.lng();
+counter3++;
+p12++;	
+
+if(p12>400310){
+	console.log(data3);
+}
+console.log("yess this is found!! hi bhabhi! "+address+" hello "+ data3[counter3-1]);
+
+  } else {
+console.log("error");
+console.log(status);
+
+
+   }
+
+
+ });
+
+}
+
+    </script>
+    
+
+  </head>
+
+  <body>
+  
+  <button onclick="setInterval(function(){hiBhabhi();},1000);">Try it</button>
+   </body>
+</html>
